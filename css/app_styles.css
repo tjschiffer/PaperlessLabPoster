@@ -1,0 +1,31 @@
+﻿body
+{
+	font-size: 25px;
+	font-size: 1.3vw;
+	margin: 0;
+	padding: 0;
+	font-family: "Calibri"; /* Assign font */
+}
+table.mainTable {
+	left: 0;
+	border-spacing: 0;
+	width: 100%;
+	border-collapse:collapse;
+	margin: 0;
+	padding: 0;
+	}
+table.mainTable td, table.mainTable th {
+	border: thin solid #2F4F4F;
+	padding: 0;
+	outline: none;
+	text-align: center;
+}
+@media all (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 1.5), (-webkit-min-device-pixel-ratio: 1.5),
+(min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx)
+{
+	table.mainTable td, table.mainTable th
+	{
+	border:2px solid #2F4F4F;
+	margin-bottom: -1px;
+	}
+}

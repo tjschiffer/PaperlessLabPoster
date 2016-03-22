@@ -1,0 +1,257 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>The Paperless Lab</title>
+	<meta name="author" content="Timothy J Schiffer">
+
+	<link rel="stylesheet" type="text/css" href="css/styles.css?v=1.0">
+<!-- 	<script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
+	<script type="text/javascript" src="js/charts-loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {packages: ['corechart', 'bar'],});
+
+		function drawStacked(divFontSize) {
+		var data = google.visualization.arrayToDataTable([
+			['Month','Has User Entered Data','Does Not Have User Entered Data', {type:'string', role:'annotation'}],
+			['2014 Jan', 26, null, null],
+			['2014 Feb', 54, 2, null],
+			['2014 Mar', 68, null, null],
+			['2014 Apr', 24, 4, null],
+			['2014 May', 41, 9, null],
+			['2014 Jun', 42, 24, null],
+			['2014 Jul', 15, 19, null],
+			['2014 Aug', 82, 4, null],
+			['2014 Sep', 46, 22, null],
+			['2014 Oct', 80, 14, null],
+			['2014 Nov', 44, 28, null],
+			['2014 Dec', 14, 46, null],
+			['2015 Jan', 42, 44, null],
+			['2015 Feb', 26, 4, null],
+			['2015 Mar', 54, 8, null],
+			['2015 Apr', 69, 0, 'Digital Batch Sheet Implementation'],
+			['2015 May', 96, null, null],
+			['2015 Jun', 88, null, null],
+			['2015 Jul', 45, null, null],
+			['2015 Aug', 69, null, null],
+			['2015 Sep', 56, null, null],
+			['2015 Oct', 98, null, null],
+			['2015 Nov', 62, null, null],
+			]);
+
+		var options = {
+			width: '100%',
+			height: '100%',
+			isStacked: true,
+			fontName: 'Calibri',
+			fontSize: divFontSize,
+			animation : {startup: true, duration: 2},
+			hAxis: {
+				title: 'Last Sample Time of Batch (Productions in Reactors)',
+				titleTextStyle: {italic: false, color: '#000040'},
+				textStyle: {
+					color: '#000040',
+					fontSize: (divFontSize - 2)
+				}
+			},
+			vAxis: {
+				title: 'Number of Plant Runs',
+				titleTextStyle: {italic: false, color: '#000040'},
+				format: 'short',
+				textStyle: {color: '#000040'},
+				viewWindowMode: 'explicit',
+					viewWindow: {
+					max: 100,
+					min: 0
+				}
+			},
+			colors: ['green','red'],
+			chartArea: {top: "7%", left: "8%", width: "72%", height: "65%" },
+			annotations: {
+				//style: 'line',
+				// alwaysOutside: true,
+				stemColor: '#000040',
+				textStyle: {
+					bold: true,
+					color: '#000040',
+					auraColor: '#ffffff',
+					fontSize: (divFontSize - 2)
+					},
+				// boxStyle: {
+				// 	'stroke': '#ffffff',
+				// 	'strokeWidth': 0.5,
+				// 	'rx': 2, 'ry': 2,
+				// 	'gradient': {
+				// 		'color1': '#ffffff',
+				// 		'color2': '#ffffff',
+				// 		'x1': '0%', 'y1': '0%',
+				// 		'x2': '0%', 'y2': '100%',
+				// 		'useObjectBoundingBoxUnits': true
+				// 	}
+				// }
+			}
+		};
+
+		var chart = new google.visualization.ColumnChart(document.getElementById('stackedBarGraph'));
+		chart.draw(data, options);
+		};
+
+		google.charts.setOnLoadCallback(drawStacked);
+
+		function resizeBody() {
+			var myDiv = document.getElementById("container");
+			var myDivHeight = myDiv.clientHeight
+			divFontSize = (0.0114965 * myDivHeight - 0.207102);
+			myDiv.style.fontSize = divFontSize + 'px';
+
+			columnWidth = Math.round(myDiv.clientWidth / 3.0769);
+			var columns = document.getElementsByClassName("column");
+			var index;
+			for (index = 0; index < columns.length; ++index) {
+				columns[index].style.width = columnWidth + 'px';
+				// columns[index].style.height = Math.round(columns[index].clientHeight) + 'px';				
+			};
+			// document.getElementById('samplingSheetWrap').style.paddingBottom = (1.69607 * Math.pow(10, -6) * Math.pow(myDivHeight, 3) - 0.00392882 * Math.pow(myDivHeight, 2) + 3.13582 * myDivHeight - 665.839) + 'px';
+			document.getElementById('novaStatusWrap').style.paddingBottom = (0.000072663 * Math.pow(myDivHeight, 2) + 0.152912 * myDivHeight + 74.3787) + 'px';
+			document.getElementById('setpointControllerWrap').style.paddingBottom = (-0.0000437891 * Math.pow(myDivHeight, 2) + 0.10905 * myDivHeight - 10) + 'px';
+			drawStacked(divFontSize); // redraw the graph on body resize			
+		};
+
+	</script>
+
+	<!--[if lt IE 9],>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif],-->
+</head>
+
+<body onresize="resizeBody()" onload="resizeBody()">
+<div class="wrapperWrapper">
+<div class="wrapper">
+<div class="inner" id="container">
+	<!-- <img src="images/background.jpg" class="stretch" alt="REGN Background" /> -->
+	<div id="header">
+	<h1>The Paperless Lab</h1>
+	<h2>Enabling Robust Process Development by Creating an Electronic Record of All Lab Data</h2>
+	<h2>Timothy J. Schiffer</h2>
+	</div>
+<!-- 	<div class="bar"></div> -->
+	<div class="innerColumnWrapper">
+	<div id="column-left" class="column">
+		<div class="headerCell">
+			<div>Abstract</div>
+		</div>
+		<div class="bodyCell" style="height: 18%">
+			<div><p>In the Cell Culture and Medium Development group of PMPD, small-scale experiments with large numbers of batches are run in quick succession and frequency. Large data sets are generated and used to be stored across a variety of paper records and unconnected lab computers. Tedious data mining and manual entry into structured databases resulted in an inability to fully compare and analyze experiments.</p>
+			<p>Many of these obstacles can be overcome by integrating new intuitive user interfaces with already existing systems. Replacing paper records and dry-erase boards with websites and computer programs capable of accepting real-time information directly from the lab leads to a reduction in information silos and eliminates double data entry. With a focus on automation and data-rich visualizations, the Paperless Lab initiative directly improves the analysis of cell culture batches and ultimately enhances our process understanding.</p></div>
+		</div>
+		<div class="headerCell">
+			<div>Immense Data Generation During Upstream Process Development</div>
+		</div>
+		<div class="bodyCell" style="height: 38%">
+			<div>
+			<p>Data is generated and collected in support of manufacturing process development. The upstream process begins with a cryogenically frozen vial of cells which is thawed into a shaker flask. The culture is then successively diluted through a series of vessels as the cells remain in exponential growth, in which cells continuously divide. Once an appropriate amount of cells have accumulated, the culture is transferred to the production vessel, which ranges from a shaker flask for experiments with large condition sets to scale-up reactors for production of kilogram quantities for pre-clinical testing.</p>
+			<img src="images\SeedTrain.jpg"></img>
+			<p>Throughout the process, offline and online data are generated and stored in the appropriate data collection system. In addition to process data, an enormous amount of information related to cell culture medium, manual tasks, and other user-generated data must be stored and viewed in effecient, highly-available data structures. By eliminating paper records and collecting lab generated data electronically, critical process decisions can be made with real-time data displayed in information-rich visualizations.
+			</p>
+			</div>
+		</div>
+		<div class="headerCell">
+			<div>Enabling High Data Visibility With Valuable Data Storage Systems</div>
+		</div>
+		<div class="bodyCell" style="height: calc(29% - 0.5px)">
+			<div>
+			<p>While paper records and reusable writing surfaces have been used for in-lab collection of data since the dawn of science, recent technological advancements have allowed for data to be collected digitally and immediately stored in an appropriate network-connected storage system. By leveraging commercially available data-based applications and creating custom web-based tools and visualizations, information can be viewed and analyzed from any network connected device.</p>
+			<h2>Data Collection and Visualization Systems:</h2>
+				<ul>
+					<div><img src="images\osisoft_logo.png" id="osiLogo"></img><li>
+						<b>OSISoft PI Historian</b> - a powerful system for collecting, storing, and visualizing continuous data with a robust, highly-available architecture
+						<ul>
+							<li>Stores and displays online data for bioreactors and status of off-line analyzers</il>
+						</ul>
+					</li></div>
+					<div><img src="images\lims.png" id="limsLogo"></img><li>
+						<b>Protein LIMS</b> - PMPD’s Laboratory Information Management System, a relational database application focused on associations between objects and attribute data
+						<ul>
+							<li>Captures results, off-line analyses, and setpoints of cell culture experiments</il>
+						</ul>
+					</li></div>
+					<div><img src="images\sql_server_logo.png" id="sqlLogo"><li>
+						<b>Microsoft SQL Server</b> - a relational database for storing and retrieving table data that can be quickly queried and filtered
+						<ul>
+							<li>Aggregates results of offline sample analyses from in-lab instruments</il>
+						</ul>
+					</li></div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="column-center" class="column">
+		<div class="headerCell">
+			<div>Intuitive Digital Batch Sheets Facilitate Daily Data Entry</div>
+		</div>
+		<div class="bodyCell" style="height: 73.5%">
+			<div>
+			<p>Previous to the implementation of the Digital Batch Sheet application, lab personnel recorded information on paper batch sheets, later copying the relevant data into the LIMS system. This process was incredibly tedious, requiring values of be copied one at a time across separate web pages for each single value. Lack of data entry into LIMS resulted in an inability to compare batch data across experiments.</p>
+			<div id="graphWrap"><div id="stackedBarGraph"></div></div>
+			<p>By replicating the functionally of the paper batch sheets in a user-friendly web application, 100% user compliance has been achieved.</p>
+			<div id="samplingSheetWrap" class="iframeWrap">
+			<iframe scrolling="no" src="http://tjschiffer.com/Sampling-Sheet/">
+				<p>Your browser does not support iframes.</p>
+			</iframe></div>
+			<p>Digital batch sheets allow for scanning sample information into the analyzer. Once the analyses results are parsed into LIMS, the results are displayed on the digital batch sheets. User generated data is entered directly into the application, bypassing the paper step by storing and retrieving the data in LIMS in addition to displaying real time results relevent to process decisions.</p>
+			</div>
+		</div>
+		<div class="headerCell">
+			<div>Ensuring Accurate Setpoints With A Visual Web Application</div>
+		</div>
+		<div class="bodyCell" style="height: calc(16.5% - 0.5px)">
+			<div>
+			<p>Previous to the Paperless Lab Initiative, critical setpoints would be written down or printed and manually entered into each control system for each individual bioreactor. By leveraging the bidirectional data-flow ability of the PI Historian System and a spreadsheet-like web application that allows for the entry of reactor setpoints, errors as a result of incorrect setpoint entry are eliminated.</p>
+			<div id="setpointControllerWrap" class="iframeWrap">
+			<iframe scrolling="no" src="SetpointController.html">
+				<p>Your browser does not support iframes.</p>
+			</iframe></div>
+		</div>
+		</div>
+	</div>
+	<div id="column-right" class="column">
+		<div class="headerCell">
+			<div>Collaborative White Board For Task Coordination</div>
+		</div>
+		<div class="bodyCell" style="height: 29%">
+			<div>
+			<p>Dry-erase white boards can be used for everything from task coordination to asset management. While white boards are an essential in-lab communication tool, they are limited in their ability to view historical data, be edited remotely, and are subject to poor handwriting. To overcome these shortcomings, the Microsoft OneNote application has been implemented to create a collaborative, highly-available workspace with a full audit trail.</p>
+			<img src="images\OneNote.jpg" class="oneNoteImage"></img>
+			</div>
+		</div>
+		<div class="headerCell">
+			<div>Highly Visible Analyzer Results Increase Data Mining Efficiency</div>
+		</div>
+		<div class="bodyCell" style="height: 45%">
+			<div>
+			<p>When all data is properly collected and stored in a highly-available database, data-rich visualizations can be created to display real-time equipment statuses and historical results. This leads to less searching for an available instrument as well as a phenomenal reduction in time spent data mining since all results are aggregated to a single source.</p>
+			<div id="novaStatusWrap" class="iframeWrap">
+				<iframe scrolling="no" src="NovaStatus.html">
+					<p>Your browser does not support iframes.</p>
+				</iframe></div>
+			</div>
+		</div>
+		<div class="headerCell">
+			<div>Summary</div>
+		</div>
+		<div class="bodyCell" style="height: calc(11% - 0.5px)">
+			<div>
+			<p>With implementation of web applications and automated data collection, data gaps and tedious tasks are eliminated. A high level of automation and implementation of intuitive applications will be essential as PMPD increases development throughput. The Paperless Lab initiative has saved thousands of work hours by reducing data mining while increasing the visibility and analyses of lab generated data by eliminating paper records for in-lab data collection.</p>
+			</div>
+		</div>
+	</div>
+	<div class="imgContainer">
+		<div><img src="images/REGN_logo.png" id="logo"></img></div>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>
