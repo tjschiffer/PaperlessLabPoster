@@ -3,14 +3,30 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-
 	<title>The Paperless Lab</title>
 	<meta name="author" content="Timothy J Schiffer">
-
 	<link rel="stylesheet" type="text/css" href="css/styles.css?v=1.0">
-<!-- 	<script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
-	<script type="text/javascript" src="js/charts-loader.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+		function resizeBody() {
+			var myDiv = document.getElementById("container");
+			var myDivHeight = myDiv.clientHeight
+			divFontSize = (0.0114965 * myDivHeight - 0.207102);
+			myDiv.style.fontSize = divFontSize + 'px';
+
+			columnWidth = Math.round(myDiv.clientWidth / 3.0769);
+			var columns = document.getElementsByClassName("column");
+			var index;
+			for (index = 0; index < columns.length; ++index) {
+				columns[index].style.width = columnWidth + 'px';
+			};
+			document.getElementById('samplingSheetWrap').style.paddingBottom = (1.69607 * Math.pow(10, -6) * Math.pow(myDivHeight, 3) - 0.00392882 * Math.pow(myDivHeight, 2) + 3.13582 * myDivHeight - 665.839) + 'px';
+			document.getElementById('novaStatusWrap').style.paddingBottom = (0.000072663 * Math.pow(myDivHeight, 2) + 0.152912 * myDivHeight + 74.3787) + 'px';
+			document.getElementById('setpointControllerWrap').style.paddingBottom = (-0.0000437891 * Math.pow(myDivHeight, 2) + 0.10905 * myDivHeight - 10) + 'px';
+			drawStacked(divFontSize); // redraw the graph on body resize
+		};
+
+
 		google.charts.load('current', {packages: ['corechart', 'bar'],});
 
 		function drawStacked(divFontSize) {
@@ -100,25 +116,6 @@
 
 		google.charts.setOnLoadCallback(drawStacked);
 
-		function resizeBody() {
-			var myDiv = document.getElementById("container");
-			var myDivHeight = myDiv.clientHeight
-			divFontSize = (0.0114965 * myDivHeight - 0.207102);
-			myDiv.style.fontSize = divFontSize + 'px';
-
-			columnWidth = Math.round(myDiv.clientWidth / 3.0769);
-			var columns = document.getElementsByClassName("column");
-			var index;
-			for (index = 0; index < columns.length; ++index) {
-				columns[index].style.width = columnWidth + 'px';
-				// columns[index].style.height = Math.round(columns[index].clientHeight) + 'px';				
-			};
-			// document.getElementById('samplingSheetWrap').style.paddingBottom = (1.69607 * Math.pow(10, -6) * Math.pow(myDivHeight, 3) - 0.00392882 * Math.pow(myDivHeight, 2) + 3.13582 * myDivHeight - 665.839) + 'px';
-			document.getElementById('novaStatusWrap').style.paddingBottom = (0.000072663 * Math.pow(myDivHeight, 2) + 0.152912 * myDivHeight + 74.3787) + 'px';
-			document.getElementById('setpointControllerWrap').style.paddingBottom = (-0.0000437891 * Math.pow(myDivHeight, 2) + 0.10905 * myDivHeight - 10) + 'px';
-			drawStacked(divFontSize); // redraw the graph on body resize			
-		};
-
 	</script>
 
 	<!--[if lt IE 9],>
@@ -126,7 +123,7 @@
 	<![endif],-->
 </head>
 
-<body onresize="resizeBody()" onload="resizeBody()">
+<body onresize="resizeBody();" onload="resizeBody();">
 <div class="wrapperWrapper">
 <div class="wrapper">
 <div class="inner" id="container">
